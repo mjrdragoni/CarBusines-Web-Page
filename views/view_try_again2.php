@@ -34,7 +34,7 @@ body {
 		<div class="row">
 			<p><center><h1><font color="#FF8C00">CPF</font> já cadastrado. <br> Tente Novamente!</h1></center></p>
 			<br><br><br><br>
-			 <center><a href="javascript:window.history.go(-1)"><button class="btn btn-lg btn-warning" type="button">Informar CPF Novamente</button></center>
+			 <center><a href="../views/view_cadastro.php"><button class="btn btn-lg btn-warning" type="button">Informar CPF Novamente</button></center>
 		</div>
 	</div>	
 

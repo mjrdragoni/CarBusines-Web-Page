@@ -22,11 +22,11 @@ include("view_header.php");
 
 <body>  
 
-  <div class="container fontecorpadrao">
+  <div class="container-fluid fontecorpadrao">
     <div class="row">
       <div class="col-xs-12">	
         <center>
-         <h3> <b><p style="color:#FF8C00;">EFETUE SEU CADASTRO PARA PODER REALIZAR SUAS RESERVAS</p></b></h3> 
+         <h3><b> <p style="color:#FF8C00;">EFETUE SEU CADASTRO E TENHA ACESSO TOTAL</p></b></h> 
         </center>
         <p>&nbsp;</p>
       </div>
@@ -35,7 +35,7 @@ include("view_header.php");
 
   <div class="container">
     <div class="row">
-      <div class="col-xs-12 col-md-12 col-md-offset-2">
+      <div class="col-xs-12 col-md-10 col-md-offset-2">
         <form id="formcadastro" name="formcadastro" method="post" action="../models/model_cadastra_cliente.php">
          <p>
             <label for="usuario">Nome de Usuário</label>
@@ -105,7 +105,9 @@ include("view_header.php");
             <input type="text" name="cep" id="cep" required="Digite seu CEP"/></P>
           <p>&nbsp;</p>
           <p>
-            <center><input  class="btn btn-lg btn-primary" type="submit" name="cadastrar" id="cadastrar" value="Efetuar meu Cadastro" onsubmit="validateForm();" /> </center>
+            <center><a href="../index.php"><input  class="btn btn-lg btn-warning" type="button" name="cancelar" id="cancelar" value="Cancelar"></a>
+            <input  class="btn btn-lg btn-primary" type="submit" name="cadastrar" id="cadastrar" value="Efetuar meu Cadastro" onsubmit="validateForm();" />
+            </center>
           </p>     
         </form>   
       </div>  

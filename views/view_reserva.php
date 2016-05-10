@@ -1,20 +1,7 @@
 <?php
 
 	include("view_header_restrita.php");
-	@session_start();
-	if ( !isset($_SESSION['usuario']) and !isset($_COOKIE['usuarioLogado']) ) {
-    
-    unset ($_COOKIE['usuarioLogado']);
-		header("Location:view_cadastro.php");
-		exit();
-	} 
-	else{
-		if (isset($_SESSION['usuario']) || isset($_COOKIE['usuarioLogado'])) {
-			if(isset($_COOKIE['usuarioLogado']))
-			$_SESSION['usuario'] = $_COOKIE['usuarioLogado'];
-			
-		}	
-	}	
+	
 ?>
 <!DOCTYPE html>
 <html>
@@ -38,7 +25,7 @@
 <body>	
 	
 
-	<script src="../js/jquery-1.12.3.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.3/jquery.min.js"></script>
 	<script src="../js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -32,7 +32,7 @@ body {
 		<div class="row">
 			<p><center><h1>Infelizmente alguém já escolheu este <font color="#FF8C00">Nome de Usuário</font>. <br> Escolha outro Por Favor!</h1></center></p>
 			<br><br><br><br>
-			 <center><a href="javascript:window.history.go(-1)"><button class="btn btn-lg btn-warning" type="button">Escolher outro Nome de Usuário</button></center>
+			 <center><a href="../views/view_cadastro.php"><button class="btn btn-lg btn-warning" type="button">Escolher outro Nome de Usuário</button></center>
 		</div>
 	</div>	
 

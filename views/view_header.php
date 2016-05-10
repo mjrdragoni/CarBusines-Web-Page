@@ -77,7 +77,7 @@
               </div>           
 
               <input type="submit" value="Login" class="btn btn-primary"></input> 
-              <a href="/views/view_cadastro.php"><button type="button" class="btn btn-warning">Meu Cadastro</button></a>
+              <a href="/views/view_cadastro.php"><button type="button" class="btn btn-warning">Cadastre-se</button></a>
           </form> 
         </div><!--/.nav-collapse -->
       </div>
