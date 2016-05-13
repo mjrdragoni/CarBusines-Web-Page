@@ -3,7 +3,7 @@
 // vamos declarar os dados do nosso banco de dados
 	// os dados são: host, username, pass, dbname
 
-	$db_host = "mysql.hostinger.com.br";
+	$db_host = "";
 	$db_user = "";
 	$db_pass = "";
 	$db_name = "";

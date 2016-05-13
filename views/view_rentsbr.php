@@ -44,6 +44,10 @@
   }
   </style>
 
+  <!-- adicionar  Curtir e  compartilhar do facebook-->
+  <script src="http://connect.facebook.net/pt_BR/all.js#xfbml=1"></script>
+  <script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script>
+
 </head>
 
 <body <?php $onload; ?> >
@@ -111,7 +115,7 @@
          </p>
           <p>
             <label for="nome">Nome Completo</label>
-            <input name="nome" type="text" id="nome" size="50" required/></p>
+            <input name="nome" type="text" id="nome" size="40" required/></p>
             <p><label for="rg">RG</label>
             <input name="rg" type="" id="rg" size="15" required />
             
@@ -183,10 +187,13 @@
   </div> 
 </div>>
 </div>
-
+   
+   <?php
+      include('view_footer.html');
+  ?>
 
   <script type="text/javascript" src="../js/jquery.maskedinput.min.js"></script>
   <script type="text/javascript" src="../js/jquery.validate.min.js"></script>
-  
+ 
 </body>
 </html>  

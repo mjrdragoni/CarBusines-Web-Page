@@ -65,11 +65,11 @@
              </div> 
           </span>     
           
-          <form method="POST" action="../models/model_login.php" class="navbar-form navbar-right col-xs-8" >           
+          <form method="POST" action="../model_login.php" class="navbar-form navbar-right col-xs-8" >           
               <div class="form-group ">
                 
                 <span class="navbar">
-                  <input name="login" id="login" type="text" class="form-control" placeholder="Usuário"> 
+                  <input name="login" id="login" type="text" class="form-control"  placeholder="Usuário ou E-mail"> 
                   <input name="pass" id="pass" type="password" class="form-control" placeholder="Senha">
                 </span>
                 

@@ -1,18 +1,18 @@
 <?php
-	$link = "CarRent";
-	@session_start();
-	if (isset($_GET['ac']) && $_GET['ac'] == "logout") {
+	
+	 if (isset($_GET['ac']) && $_GET['ac'] == "logout") {
 		setcookie("usuarioLogado","",time()-3600);
 
-		unset($_SESSION['usuario']);
 		session_destroy();		
 		unset($_COOKIE['usuarioLogado']);
-	}
-	
-	
+		unset($_COOKIE['idusuarioLogado']);
+	} 	   
+
+	@session_start();
 	if (isset($_SESSION['usuario']) || isset($_COOKIE['usuarioLogado'])) {
 			if(isset($_COOKIE['usuarioLogado']))
 			$_SESSION['usuario'] = $_COOKIE['usuarioLogado'];
+			@session_start();
 			include("view_header_restrita.php");
 			
 	}		
@@ -21,6 +21,7 @@
 	    include("view_header.php");			
 		} 	
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,12 +38,16 @@
 	<!-- adicionar  Bootstrap personalizado-->
 	<link rel="stylesheet" media="screen" href="../css/estilo.css">
 
+	<!-- adicionar  Curtir e  compartilhar do facebook-->
+	<script src="http://connect.facebook.net/pt_BR/all.js#xfbml=1"></script>
+	<script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script>
+
 
 
 </head>
 <body>
 	<div class="container">		
-		<div class="row">
+		<div class="row" >
 			<div id="myCarousel" class="carousel slide" data-ride="carousel">
 		  		<!-- Indicators -->
 			  <ol class="carousel-indicators">
@@ -91,10 +96,16 @@
 		<div class="row">
 			<b><center><font color="#483D8B"><h1><b>Negócios com Veículos é na </b><font color="#FF8C00"><b>CarRent</b></font>!</h1></font></b></center></b>
 			<center><h2>Se o que você quer é alugar, comprar ou vender um veículo, <br>a <b><font color="#FF8C00">CarRent</font></b> é o lugar certo.</h2></center>
+	
 		</div>
-	</div>	
+	</div>
+
+	<?php
+      include('view_footer.html');
+  	?> 	
 	
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.3/jquery.min.js"></script>
 	<script src="../js/bootstrap.min.js"></script>
+	
 </body>
 </html>

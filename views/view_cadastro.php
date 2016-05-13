@@ -18,6 +18,10 @@ include("view_header.php");
   <!-- adicionar  Bootstrap personalizado-->
   <link rel="stylesheet" media="screen" href="../css/estilo.css">
 
+  <!-- adicionar  Curtir e  compartilhar do facebook-->
+  <script src="http://connect.facebook.net/pt_BR/all.js#xfbml=1"></script>
+  <script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script>
+
 </head>
 
 <body>  
@@ -39,7 +43,7 @@ include("view_header.php");
         <form id="formcadastro" name="formcadastro" method="post" action="../models/model_cadastra_cliente.php">
          <p>
             <label for="usuario">Nome de Usuário</label>
-            <input name="usuario" type="text" id="usuario" size="20" required />
+            <input name="usuario" type="text" id="usuario" size="20" maxlength="10" pattern="[a-zA-Z0-9]+$" placeholder="Letras e/ou Números" required />
            <label for="senha">Senha</label>
             <input name="senha" type="password" id="senha" size="20" required/>
            <label for="confirmasenha">Confirme sua Senha</label>
@@ -57,7 +61,7 @@ include("view_header.php");
             <input name="telefone" type="text" id="telefone" size="45" required/>                 
           <p>
             <label for="celular"> Celular</label>
-            <input name="celular" id="celular" size="45" required/> 
+            <input name="celular" id="celular" size="45"/> 
             <label for="email">E-mail</label>
             <input name="email" type="email" id="email" size="50" required/>
                     
@@ -114,7 +118,9 @@ include("view_header.php");
     </div>   
   </div>
 
-  
+  <?php
+      include('view_footer.html');
+  ?>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.3/jquery.min.js"></script>
   <script src="../js/bootstrap.min.js"></script>

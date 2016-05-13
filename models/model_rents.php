@@ -80,6 +80,8 @@ if ($rows > 0){
         
 include_once("/home/u130462423/public_html/views/view_rentsbr.php");
 
+@mysqli_close($conexao);
+
 ?>
  
 

@@ -21,7 +21,7 @@
 	if (empty($usuario) || empty($senha) || empty($confirmasenha) || empty($nome) || 
 	empty($rg) || empty($cpf) || empty($telefone) || empty($celular) || 
 	empty($email) || empty($endereco) || empty($cidade) || empty($bairro) || 
-	empty($estado)){
+	empty($estado) || strstr($usuario, "@")){
 		require_once("/home/u130462423/public_html/views/view_try_again3.php");
 		exit();
 	} 
@@ -42,30 +42,44 @@
 					
 				$sql = "SELECT *
 						FROM clients
-						WHERE cpf_cnpj = '$cpf'";
+						WHERE cpf_cnpj = '$cpf' ";
 				$r = @mysqli_query($conexao, $sql);
 				$num = mysqli_num_rows($r); 
 					if ($num > 0){
 						require_once("/home/u130462423/public_html/views/view_try_again2.php");
-					} 
-						else {
+					}
 
-							$sql = "INSERT  INTO `clients` ( `cpf_cnpj`, `name_conpany_name` , `ie_rg`,  `addr`  ,`city`, `district`,`states`,  `zip_code`,`phone` , `cell` , `email`) VALUES  ('$cpf','$nome', '$rg', '$endereco', '$cidade', '$bairro', '$estado', '$cep','$telefone', '$celular', '$email')";
-							$r = @mysqli_query($conexao, $sql);
+							else{
+					
+								$sql = "SELECT *
+										FROM clients
+										WHERE email = '$email' ";
+								$r = @mysqli_query($conexao, $sql);
+								$num = mysqli_num_rows($r); 
+									if ($num > 0){
+										require_once("/home/u130462423/public_html/views/view_try_again4.php");
+								}
 
-							$sql = "SELECT id
-									FROM clients
-									WHERE cpf_cnpj = '$cpf'";
-							$r = @mysqli_query($conexao, $sql);	
-							$id_client  = mysqli_fetch_object($r);				
-							
+									else {
 
-							$sql = "INSERT  INTO `users` ( `id_client`, `login` , `pass`) VALUES  ('$id_client->id','$usuario', '$confirmasenha')";
-													
-							$r = @mysqli_query($conexao, $sql); 
-							require_once("/home/u130462423/public_html/views/view_success.php"); 	
-						}			
-			}
+										$sql = "INSERT  INTO `clients` ( `cpf_cnpj`, `name_conpany_name` , `ie_rg`,  `addr`  ,`city`, `district`,`states`,  `zip_code`,`phone` , `cell` , `email`) VALUES  ('$cpf','$nome', '$rg', '$endereco', '$cidade', '$bairro', '$estado', '$cep','$telefone', '$celular', '$email')";
+										$r = @mysqli_query($conexao, $sql);
+
+										$sql = "SELECT id
+												FROM clients
+												WHERE cpf_cnpj = '$cpf'";
+										$r = @mysqli_query($conexao, $sql);	
+										$id_client  = mysqli_fetch_object($r);				
+										
+
+										$sql = "INSERT  INTO `users` ( `id_client`, `login` , `pass`) VALUES  ('$id_client->id','$usuario', MD5('$confirmasenha'))";
+																
+										$r = @mysqli_query($conexao, $sql); 
+										require_once("/home/u130462423/public_html/views/view_success.php"); 	
+								}	}			
+				
+				}				
+
 	}
 
 	@mysqli_close($conexao);

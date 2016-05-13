@@ -62,7 +62,7 @@
           </span> 
           	<div class="navbar-form navbar-right col-xs-6">
 				<p><b><h3>Você está logado como <font color="#FF8C00"><?=$_SESSION['usuario']?></font> </h3></b></p>
-				<p><a href="../index.php?r=login&ac=logout"><font color="#FF8C00"> Efetuar Logoff</font></a> </p></
+				<p><a href="../index.php?ac=logout"><font color="#FF8C00"> Efetuar Logoff</font></a> </p></
 			</div>
   
 			

@@ -1,6 +1,5 @@
 <?php
-    session_start();
-    
+        
 	$titulo = 'Locadora e Revenda de Veículos CarRent';
 	//Previne cache nas páginas
 

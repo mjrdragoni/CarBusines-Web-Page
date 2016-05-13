@@ -29,6 +29,10 @@
   <!-- adicionar  Bootstrap personalizado-->
   <link rel="stylesheet" media="screen" href="../css/estilo.css">
 
+  <!-- adicionar  Curtir e  compartilhar do facebook-->
+  <script src="http://connect.facebook.net/pt_BR/all.js#xfbml=1"></script>
+  <script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script>
+
 </head>
 
 <body>
@@ -66,7 +70,9 @@
   </form>
   </center>  <br><br>
    
-  
+  <?php
+      include('view_footer.html');
+  ?>
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.3/jquery.min.js"></script>
   <script src="../js/bootstrap.min.js"></script>
 </body>
