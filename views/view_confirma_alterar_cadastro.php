@@ -1,7 +1,7 @@
 <?php
 
 	$link = "Aluguel";
-	require_once("/home/u130462423/public_html/models/model_reserve.php");
+	
 	@session_start();
 	if (isset($_SESSION['usuario']) || isset($_COOKIE['usuarioLogado'])) {
 			if(isset($_COOKIE['usuarioLogado']))
@@ -49,30 +49,30 @@
 			<div class="col-xs-12 col-md-10 col-md-offset-1">
 				<div class="well">
 					<center> <h3><b> <p>
-							PARABÉNS, SUA <font color="#FF8C00">RESERVA</font> FOI REALIZADA COM <font color="#FF8C00">SUCESSO</font>!
+							PARABÉNS, SEU <font color="#FF8C00">CADASTRO</font> FOI ALTERADO COM <font color="#FF8C00">SUCESSO</font>!
 							</p></b></h3>
 					</center><br><br>
 
 					<h4>
-						<font color="#FF8C00">Cód. da Reserva:</font> <?=$id_reservation?> <br><br><br>
-						<font color="#FF8C00">Data para Retirada: </font>  <?=$dataretirada?>
-						<font color="#FF8C00">Data para Entrega: </font> <?=$dataentrega?>
-						<font color="#FF8C00">Hora para Retirada e Entrega: </font>  <?=$horaretirada?><br><br>
-						<font color="#FF8C00">Cliente: </font><?=$client_name?>
-						<font color="#FF8C00">CPF:</font> <?=$client_cpf?>
-						<font color="#FF8C00">E-mail:</font> <?=$client_email?><br><br>
-						<font color="#FF8C00">Cód. do Veículo:</font> <?=$id_car?>
-						<font color="#FF8C00">Marca: </font> <?=$brand?>
-						<font color="#FF8C00">Modelo: </font> <?=$model?>
-						<font color="#FF8C00">Cor: </font><?=$color?>
-						<font color="#FF8C00">Preço da Diária: </font> R$ <?=$rental_price?>,00
-						<font color="#FF8C00">Valor Total: </font> R$ <?=$valtot?>,00
+						<font color="#FF8C00">Nome:</font> <?=$nome?>
+						<font color="#FF8C00">RG: </font>  <?=$rg?>
+						<font color="#FF8C00">CPF: </font> <?=$cpf?><br><br>
+						<font color="#FF8C00">Endereço: </font>  <?=$end?>
+						<font color="#FF8C00">Cidade: </font><?=$cidade?>
+						<font color="#FF8C00">Bairro:</font> <?=$bairro?>
+						<font color="#FF8C00">Estado:</font> <?=$estado?>
+						<font color="#FF8C00">CEP:</font> <?=$cep?><br><br>
+						<font color="#FF8C00">Telefone: </font> <?=$tel?>
+						<font color="#FF8C00">Celular: </font> <?=$cel?>
+						<font color="#FF8C00">E-mail: </font><?=$email?>						
 					</h4>
 				</div>
 
 				<br>
 
-				<center><h3>Em instantes você receberá um e-mail com a confirmação de sua reserva.</h3></center>			
+				<center>
+				<a href="../index.php"><input  class="btn btn-lg btn-warning" type="button" name="continuar" id="continuar" value="Continuar"></a>
+            	<a href="../views/view_alterar_cadastro.php"><input  class="btn btn-lg btn-primary" type="submit" name="alterar" id="alterar" value="Rever as Alterações" /></a>		
 			</div>
 		</div>
 	</div>
