@@ -32,7 +32,8 @@
       <script src="https://oss.maxcdn.com/rtespond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body>	
+<body>
+	
 	<!-- Fixed navbar -->
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">

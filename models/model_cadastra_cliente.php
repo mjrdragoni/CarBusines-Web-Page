@@ -75,7 +75,7 @@
 										$sql = "INSERT  INTO `users` ( `id_client`, `login` , `pass`) VALUES  ('$id_client->id','$usuario', MD5('$confirmasenha'))";
 																
 										$r = @mysqli_query($conexao, $sql); 
-										require_once("/home/u130462423/public_html/views/view_success.php"); 	
+										header("Location: ../views/view_success.php"); 	
 								}	}			
 				
 				}				

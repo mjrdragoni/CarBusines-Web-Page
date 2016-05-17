@@ -1,6 +1,8 @@
 <?php
-	$link = "Sobre";
+	$link = "Aluguel";
+	$_GET['id'];
 	@session_start();
+	$_SESSION['idcar'] = $_GET['id'];
 	if (isset($_SESSION['usuario']) || isset($_COOKIE['usuarioLogado'])) {
 			if(isset($_COOKIE['usuarioLogado']))
 			$_SESSION['usuario'] = $_COOKIE['usuarioLogado'];
@@ -9,7 +11,7 @@
 	}		
 	else{
 		
-	    include("view_header.php");			
+	    header("Location:../index.php?ac=logout");		
 		} 
 		
 ?>
@@ -28,35 +30,33 @@
 
 	<!-- adicionar  Bootstrap personalizado-->
 	<link rel="stylesheet" media="screen" href="../css/estilo.css">
+
+	<!-- adicionar  Curtir e  compartilhar do facebook-->
+	<script src="http://connect.facebook.net/pt_BR/all.js#xfbml=1"></script>
+	<script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script>
+
 	
   
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-
-	<!-- adicionar  Curtir e  compartilhar do facebook-->
-	<script src="http://connect.facebook.net/pt_BR/all.js#xfbml=1"></script>
-	<script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script>
-
-	<!-- adicionar  Curtir e  compartilhar do facebook-->
-	<script src="http://connect.facebook.net/pt_BR/all.js#xfbml=1"></script>
-	<script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script>
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
+	<script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+	<script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
+	
 </head>	
 
  <body>
-
-	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+	
 	<script>
-	$(function() {
-	$("#dataretirada").datepicker({
-	    dateFormat: 'dd/mm/yy',
-	    dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'],
-	    dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
-	    dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
-	    monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
-	    monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez']
-	});
-	});
-	</script>
+$(function() {
+    $("#dataretirada").datepicker({
+        dateFormat: 'dd/mm/yy',
+        dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'],
+        dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
+        dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
+        monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+        monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez']
+    });
+});
+</script>
 	
 	<script>
 	$(function() {
@@ -78,25 +78,26 @@
 
 				<div class="well">
 				  <div id="datetimepicker3" class="input-append">
-				  	  <form id="formreserva" name="formreserva" method="post" action="../models/model_reserva_alguel.php">
+				  	  <form id="formreserva" name="formreserva" method="post" action="../models/model_reserve.php">
 					  	<center> <h3><b> <p>
 							ESCOLHA A <font color="#FF8C00">DATA</font> E A <font color="#FF8C00">HORA</font> PARA RETIRAR O VEÍCULO <br> E A <font color="#FF8C00">DATA</font> PARA DEVOLVÊ-LO 
 							</p></b></h3></center><br><br>
 							<center><p>
 							<label for="dataretirada">Data de Retirada</label>
-							<input type="text" id="dataretirada" name="dataretirada">&nbsp;
+							<input type="text" id="dataretirada" name="dataretirada" required="true">&nbsp;
 							<label for="dataentrega">Data de Entrega</label>
-							<input type="text" id="dataentrega" name="dataentrega">
+							<input type="text" id="dataentrega" name="dataentrega" required="true">
 						</p><br>
 							  <p>
 							    <label for="horaretirada">Hora de Retirada</label>
-							    <select name="horaretirada" size="1" id="horaretirada">
-							      <option> 7:00 h</option>
-							      <option> 7:30 h</option>
-							      <option> 8:00 h</option>
-							      <option> 8:30 h</option>
-							      <option> 9:00 h</option>
-							      <option> 9:30 h</option>
+							    <select  name="horaretirada" size="1" id="horaretirada" required="true">
+							      <option></option>
+							      <option> 07:00 h</option>
+							      <option> 07:30 h</option>
+							      <option> 08:00 h</option>
+							      <option> 08:30 h</option>
+							      <option> 09:00 h</option>
+							      <option> 09:30 h</option>
 							      <option> 10:00 h</option>
 							      <option> 10:30 h</option>
 							      <option> 11:00 h</option>
@@ -129,8 +130,8 @@
 							  </p><br><br>
 							  
 						</center>
-						 <center><a href="javascript:window.history.go(-1)"><input  class="btn btn-md btn-warning" type="button" name="cancelar" id="cancelar" value="Cancelar"></a>
-			            <input  class="btn btn-md btn-primary" type="submit" name="cadastrar" id="cadastrar" value="Efetuar meu Cadastro" onsubmit="validateForm();" />
+						 <center><a href="view_rentsb.php"><input  class="btn btn-md btn-warning" type="button" name="cancelar" id="cancelar" value="Cancelar"></a>
+			            <input  class="btn btn-md btn-primary" type="submit" name="cadastrar" id="cadastrar" value="Efetuar minha Reserva" onsubmit="validateForm();" />
 			            </center>	    	
 
 
@@ -153,7 +154,5 @@
   	?>
 
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.3/jquery.min.js"></script>
-	<script src="../js/bootstrap.min.js"></script>
 </body>
 </html>

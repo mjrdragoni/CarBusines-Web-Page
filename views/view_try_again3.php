@@ -1,5 +1,11 @@
 <?php
-	include("view_header.php");	
+	include("view_header.php");
+	setcookie("usuarioLogado","",time()-3600);
+	setcookie("idusuarioLogado","",time()-3600);
+
+		@session_destroy();		
+		unset($_COOKIE['usuarioLogado']);
+		unset($_COOKIE['idusuarioLogado']);	
 ?>
 
 <!DOCTYPE html>
@@ -12,9 +18,9 @@
 <body>
 	<div class="container col-xs-12">
 		<div class="row">
-			<p><center><h1><font color="#FF8C00">OPS!</font> Algo saiu errado. <br> Tente Novamente!</h1></center></p>
+			<p><center><h1><br><br><br><br><font color="#FF8C00">OPS!</font> Algo saiu errado.</h1></center></p>
 			<br><br><br><br>
-			 <center><a href="../views/view_cadastro.php"><button class="btn btn-lg btn-warning" type="button">Tentar Novamente</button></center>
+			 
 		</div>
 	</div>	
 

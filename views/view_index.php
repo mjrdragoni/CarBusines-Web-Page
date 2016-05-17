@@ -2,6 +2,7 @@
 	
 	 if (isset($_GET['ac']) && $_GET['ac'] == "logout") {
 		setcookie("usuarioLogado","",time()-3600);
+		setcookie("idusuarioLogado","",time()-3600);
 
 		session_destroy();		
 		unset($_COOKIE['usuarioLogado']);
@@ -10,9 +11,15 @@
 
 	@session_start();
 	if (isset($_SESSION['usuario']) || isset($_COOKIE['usuarioLogado'])) {
-			if(isset($_COOKIE['usuarioLogado']))
-			$_SESSION['usuario'] = $_COOKIE['usuarioLogado'];
-			@session_start();
+			if(isset($_COOKIE['usuarioLogado'])){
+				$_COOKIE['idclient'] = $_COOKIE['idusuarioLogado'];
+				$_SESSION['usuario'] = $_COOKIE['usuarioLogado'];
+
+				
+				
+			}
+			$_SESSION['idclient'] = $_COOKIE['idclient'];
+					
 			include("view_header_restrita.php");
 			
 	}		
@@ -42,10 +49,35 @@
 	<script src="http://connect.facebook.net/pt_BR/all.js#xfbml=1"></script>
 	<script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script>
 
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = "//connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v2.6";
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
 
 
 </head>
 <body>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : 'your-app-id',
+      xfbml      : true,
+      version    : 'v2.5'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
 	<div class="container">		
 		<div class="row" >
 			<div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -98,6 +130,7 @@
 			<center><h2>Se o que você quer é alugar, comprar ou vender um veículo, <br>a <b><font color="#FF8C00">CarRent</font></b> é o lugar certo.</h2></center>
 	
 		</div>
+		<div class="fb-comments col-xs-12 col-md-6 col-md-offset-3"  data-href="https://www.facebook.com/CarRent-385255211598374/" data-numposts="5"></div>
 	</div>
 
 	<?php
