@@ -60,7 +60,7 @@
                <li><?php if ($link == 'Sobre') echo '<li class="active">';?><a href="/views/view_sobre.php">Sobre</a></li>
                <li><?php if ($link == 'Contato') echo '<li class="active">';?><a href="#about">Contato</a></li>
                <li><?php if ($link == 'Aluguel') echo '<li class="active">';?><a href="/views/view_rentsb.php">Aluguel</a>  </li>
-               <li><?php if ($link == 'Venda') echo '<li class="active">';?><a href="#about">Compra e Venda</a></li>
+               <li><?php if ($link == 'Venda') echo '<li class="active">';?><a href="/views/view_sales.php">Compra e Venda</a></li>
               
               </ul>
              </div> 
@@ -70,14 +70,14 @@
               <div class="form-group ">
                 
                 <span class="navbar">
-                  <input name="login" id="login" type="text" class="form-control"  placeholder="Usuário ou E-mail"> 
-                  <input name="pass" id="pass" type="password" class="form-control" placeholder="Senha">
+                  <input name="login" id="login" type="text" class="form-control" required="true" placeholder="Usuário ou E-mail"> 
+                  <input name="pass" id="pass" type="password" class="form-control" required="true" placeholder="Senha">
                 </span>
                 
                 <input id="lembrar" type="checkbox" value="1" name="lembrar">  Manter Logado</input>        
               </div>           
 
-              <input type="submit" value="Login" class="btn btn-primary"></input> 
+              <input type="submit" value="Login" class="btn btn-primary" ></input> 
               <a href="/views/view_cadastro.php"><button type="button" class="btn btn-warning">Cadastre-se</button></a>
           </form> 
         </div><!--/.nav-collapse -->

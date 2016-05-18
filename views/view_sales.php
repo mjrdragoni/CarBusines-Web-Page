@@ -1,22 +1,20 @@
 ﻿<?php
-  $link = "Aluguel";
-  require_once("/home/u130462423/public_html/models/model_rents_brands.php");
-
+  $link = "Venda";
+  require_once("/home/u130462423/public_html/models/model_sales.php");
+  require_once("/home/u130462423/public_html/controllers/conection.php");
+  
   @session_start();
-  include("view_header_restrita.php");
-  if ( !isset($_SESSION['usuario']) and !isset($_COOKIE['usuarioLogado']) ) {
-    
-    unset ($_COOKIE['usuarioLogado']);
-    header("Location:view_cadastro.php");
-    exit();
-  } 
-  else{
-    if (isset($_SESSION['usuario']) || isset($_COOKIE['usuarioLogado'])) {
+  if (isset($_SESSION['usuario']) || isset($_COOKIE['usuarioLogado'])) {
       if(isset($_COOKIE['usuarioLogado']))
       $_SESSION['usuario'] = $_COOKIE['usuarioLogado'];
+      include("view_header_restrita.php");
       
+  }   
+  else{
+    
+      include("view_header.php");     
     } 
-  } 
+    
 ?> 
 <!DOCTYPE html>
 <html>
@@ -24,16 +22,17 @@
 
   <title><?=$titulo?></title>
 
+
   <!-- define a viewport-->
   <meta name="viewport" content="width=device, initial-scale=1.0">
-  <meta charset="utf-8">
+  <meta charset="utf-8"> 
 
   <!-- adicionar o CSS Bootstrap-->
   <link rel="stylesheet" media="screen" href="../css/bootstrap.min.css">
 
   <!-- adicionar  Bootstrap personalizado-->
   <link rel="stylesheet" media="screen" href="../css/estilo.css">
-
+   <script type="text/javascript" src="../js/load_car_models.js"></script>
 </head>
 
 <body>
@@ -64,46 +63,72 @@
         <input type="checkbox" name="airbag" value="caixa de seleção" id="airbag" />
         Airbag</label>
     </p>
-    <p>
-      <label for="brands">Marca</label>
-      <select name="brands" id="brands"  onchange="load_car_models($(this).val())">
-        <option>Selecione...</option>
+    
+    <div class="col-xs-8 col-xs-offset-2">  
+      
+      <div class="col-xs-4">
+        <label for="brands">Marca</label>
+          <select name="brands" id="brands" onchange="buscar_marcas()"  >
+          <option>Selecione...</option>
+                <?=$html?>      
  
-         <?php while($brand = mysqli_fetch_array($query_brands)) { ?>
-         <option value="<?php echo $brand['id'] ?>"><?php echo $brand['name'] ?></option>
-         <?php } ?>
- 
-      </select>
+         </select>
+      </div>
 
-      <label for="model">
-       
-      Modelo</label>
-      <select name="model" id="model">
-        
-        <option>Selecione...</option>
- 
-         <?php while($car_models = mysqli_fetch_array($query_car_models)) { ?>
-         <option value="<?php echo $car_models['id'] ?>"><?php echo $car_models['name'] ?></option>
-         <?php } ?>
+      <div class="col-xs-4" id="load_models">
+        <label for="models">Modelo</label>
+        <select name="models" id="models" onchange="buscar_veiculos()">          
+          <option value="" >Selecione...</option>        
+                
+        </select>
+      </div>
 
-      </select>
-      <label for="results">Nome do Veículo</label>
-      <select name="results" id="results">
+      <div class="col-xs-4" id="load_veiculos" >
+        <label for="veiculos">Nome do Veículo</label>
+        <select name="veiculos" id="veiculos">     
+         
+         <option value="">Selecione...</option>      
 
+        </select> 
+       </div> 
 
-         <?php while($cars = mysqli_fetch_array($query_cars)) { ?>
-         <option value="<?php echo $cars['id'] ?>"><?php echo $cars['name'] ?></option>
-         <?php } ?>
-
-      </select>
-  <br />
-    </p>
+     </div>  
+    
   </form>
   </center>
+
+  <script type="text/javascript">
+
+    function buscar_marcas(){
+        var id = $('#brands').val();  //codigo do estado escolhido
+        //se encontrou o estado
+        if(id){
+          var url = '../controllers/reload_brands.php?id='+id;  //caminho do arquivo php que irá buscar as cidades no BD
+          $.get(url, function(dataReturn) {
+            $('#load_models').html(dataReturn);  //coloco na div o retorno da requisicao
+          });
+        }
+      }
+
+  </script>
   
-  
+  <script type="text/javascript">
+
+    function buscar_veiculos(){
+        var id = $('#models').val();  //codigo do estado escolhido
+        //se encontrou o estado
+        if(id){
+          var url = '../controllers/reload_models.php?id='+id;  //caminho do arquivo php que irá buscar as cidades no BD
+          $.get(url, function(dataReturn) {
+            $('#load_veiculos').html(dataReturn);  //coloco na div o retorno da requisicao
+          });
+        }
+      }
+
+  </script>
+ 
   <script src="../js/jquery-1.12.3.min.js"></script>
   <script src="../js/bootstrap.min.js"></script>
-  <script src="../js/load_car_models.js"></script>
+ 
 </body>
 </html>

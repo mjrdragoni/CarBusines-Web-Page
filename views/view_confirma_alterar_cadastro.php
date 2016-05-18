@@ -1,6 +1,6 @@
 <?php
 
-	$link = "Aluguel";
+	
 	
 	@session_start();
 	if (isset($_SESSION['usuario']) || isset($_COOKIE['usuarioLogado'])) {
@@ -28,14 +28,9 @@
 	<link rel="stylesheet" media="screen" href="../css/bootstrap.min.css">
 
 	<!-- adicionar  Bootstrap personalizado-->
-	<link rel="stylesheet" media="screen" href="../css/estilo.css">
+	<link rel="stylesheet" media="screen" href="../css/estilo.css"> 
 	
-  
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 
-	<!-- adicionar  Curtir e  compartilhar do facebook-->
-	<script src="http://connect.facebook.net/pt_BR/all.js#xfbml=1"></script>
-	<script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script>
 
 	<!-- adicionar  Curtir e  compartilhar do facebook-->
 	<script src="http://connect.facebook.net/pt_BR/all.js#xfbml=1"></script>

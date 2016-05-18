@@ -9,8 +9,8 @@
 	$sql = "SELECT users.id, clients.id AS id_client
 			FROM users 
 			INNER JOIN clients ON clients.id = users.id_client
-			WHERE users.login = '$login'  OR clients.email = '$login'
-			AND users.pass = md5('$senha') ";
+			WHERE (users.login = '$login' AND users.pass = md5('$senha')) OR 
+			(clients.email = '$login' AND users.pass = md5('$senha')) ";
 	$r = @mysqli_query($conexao, $sql);
 	while ($result = mysqli_fetch_array($r)) {			 	
 			 	$id_client = $result['id_client'];

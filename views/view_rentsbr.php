@@ -172,7 +172,7 @@
             <label for="cep">CEP</label>
             <input type="text" name="cep" id="cep" required="Digite seu CEP"/></P>
           <p>&nbsp;</p></center>
-         
+         <center><a href="/views/view_alterar_senha.php"><font color="#FF8C00">Clique aqui</font></a> caso tenha esquecido sua senha.</center>
         </div>
         <div class="modal-footer">
           <center><button type="submit" class="btn btn-warning btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>

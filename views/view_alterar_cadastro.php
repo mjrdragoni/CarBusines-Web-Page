@@ -1,5 +1,4 @@
-﻿<?php
-  $link = "Sobre";
+﻿<?php  
   require_once("/home/u130462423/public_html/models/model_altera_cliente1.php"); 
   @session_start();
   if (isset($_SESSION['usuario']) || isset($_COOKIE['usuarioLogado'])) {
@@ -43,7 +42,7 @@
     <div class="row">
       <div class="col-xs-12">	
         <center>
-         <h3><b> <p style="color:#FF8C00;">ALTERE AS INFORMAÇÕES NECESSÁRIAS</p></b></h> 
+         <h3><b> <p style="color:#FF8C00;">ALTERE AS INFORMAÇÕES QUE SE FIZEREM NECESSÁRIAS</p></b></h> 
         </center>
         <p>&nbsp;</p>
       </div>

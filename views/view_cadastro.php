@@ -43,7 +43,7 @@ include("view_header.php");
         <form id="formcadastro" name="formcadastro" method="post" action="../models/model_cadastra_cliente.php">
          <p>
             <label for="usuario">Nome de Usuário</label>
-            <input name="usuario" type="text" id="usuario" size="20" maxlength="10" pattern="[a-zA-Z0-9]+$" placeholder="Letras e/ou Números" required />
+            <input name="usuario" type="text" id="usuario" size="21" maxlength="10" pattern="[a-zA-Z0-9]+$" placeholder="Apenas Letras/Números" required />
            <label for="senha">Senha</label>
             <input name="senha" type="password" id="senha" size="20" required/>
            <label for="confirmasenha">Confirme sua Senha</label>
@@ -109,7 +109,9 @@ include("view_header.php");
             <input type="text" name="cep" id="cep" required="Digite seu CEP"/></P>
           <p>&nbsp;</p>
           <p>
-            <center><a href="../index.php"><input  class="btn btn-lg btn-warning" type="button" name="cancelar" id="cancelar" value="Cancelar"></a>
+            <center>
+            <a href="/views/view_alterar_senha.php"><font color="#FF8C00">Clique aqui</font></a> caso tenha esquecido sua senha. &nbsp; &nbsp;&nbsp; &nbsp;
+            <a href="../index.php"><input  class="btn btn-lg btn-warning" type="button" name="cancelar" id="cancelar" value="Cancelar"></a>
             <input  class="btn btn-lg btn-primary" type="submit" name="cadastrar" id="cadastrar" value="Efetuar meu Cadastro" onsubmit="validateForm();" />
             </center>
           </p>     
