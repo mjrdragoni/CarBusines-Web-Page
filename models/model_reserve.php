@@ -25,13 +25,13 @@
   }
   
   $sql = "SELECT status FROM cars 
-          WHERE id = 'id_car'";
+          WHERE id = '$id_car'";
   $r = @mysqli_query($conexao, $sql);
   while ($result = mysqli_fetch_array($r)) {
     $status = $result['status'];
   }
   
-  if ($status = "N"){
+  if ($status == "N"){
     require_once("/home/u130462423/public_html/views/view_try_again3.php");
     exit();
     }

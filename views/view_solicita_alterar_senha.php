@@ -1,27 +1,9 @@
-﻿<?php
-require_once("/home/u130462423/public_html/controllers/conection.php");
-$user = mysqli_real_escape_string($conexao, trim($_GET['u']));
-$chave = mysqli_real_escape_string($conexao, trim($_GET['c']));
-
-$sql = "SELECT * FROM pass_recovery WHERE user = '$user' AND confirmation = '$chave'";
-
-$r = mysqli_query($conexao, $sql);
-$n = mysqli_num_rows($r);
-
-if($n < 1){
-   require_once("/home/u130462423/public_html/views/view_try_again3.php");
-   exit();
-
- } 
-
-  else{
-
-  $sql = "DELETE FROM pass_recovery WHERE user = '$user' AND confirmation = '$chave';";
-  $r = mysqli_query($conexao, $sql);
+﻿<?php  
+  
   include("view_header.php");
- } 
+    
+?> 
 
-  ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,7 +32,7 @@ if($n < 1){
     <div class="row">
       <div class="col-xs-12">	
         <center>
-         <h3><b> <p style="color:#FF8C00;">REDEFINA SUA SENHA</p></b></h> 
+         <h3><b> <p style="color:#FF8C00;">SOLICITAÇÃO PARA REDEFINIÇÃO DE SENHA</p></b></h> 
         </center>        
       </div>
     </div>
@@ -58,16 +40,14 @@ if($n < 1){
 
   <div class="container">
     <div class="row">
-      <div class="col-xs-12 col-md-10 col-md-offset-1">
-        <form id="formcadastro" name="formcadastro"  autocomplete="off" method="post" action="../models/model_altera_senha.php">  
+      <div class="col-xs-12 col-md-10">
+        <form id="formcadastro" name="formcadastro"  autocomplete="off" method="post" action="../models/model_recovery_pass.php">  
            
-          <p><br><br>
-            <input name="user" type="hidden" id="user" size="40" value="<?=$user?>" readonly  required>
-            <label for="senha">Digite uma Nova Senha</label>&nbsp;
-            <input name="senha" type="password" id="senha" size="40" required ><br><br>
-            <label for="confirmasenha">Confirme a Nova Senha</label>&nbsp;
-            <input name="confirmasenha" type="password" id="confirmasenha" size="40" required/>
-          </p><br><br>
+          <center><br><br><br><br>
+            <label for="email">Informe seu E-mail</label>
+            <input name="email" type="text" id="email" size="40"  required><br><br>    
+
+         </center><br><br>
       
           <p>
             <center><a href="../index.php"><input  class="btn btn-lg btn-warning" type="button" name="cancelar" id="cancelar" value="Cancelar"></a>

@@ -110,7 +110,7 @@ include("view_header.php");
           <p>&nbsp;</p>
           <p>
             <center>
-            <a href="/views/view_alterar_senha.php"><font color="#FF8C00">Clique aqui</font></a> caso tenha esquecido sua senha. &nbsp; &nbsp;&nbsp; &nbsp;
+            <a href="/views/view_solicita_alterar_senha.php"><font color="#FF8C00">Clique aqui</font></a> caso tenha esquecido sua senha. &nbsp; &nbsp;&nbsp; &nbsp;
             <a href="../index.php"><input  class="btn btn-lg btn-warning" type="button" name="cancelar" id="cancelar" value="Cancelar"></a>
             <input  class="btn btn-lg btn-primary" type="submit" name="cadastrar" id="cadastrar" value="Efetuar meu Cadastro" onsubmit="validateForm();" />
             </center>

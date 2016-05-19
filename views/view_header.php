@@ -74,7 +74,8 @@
                   <input name="pass" id="pass" type="password" class="form-control" required="true" placeholder="Senha">
                 </span>
                 
-                <input id="lembrar" type="checkbox" value="1" name="lembrar">  Manter Logado</input>        
+                <input id="lembrar" type="checkbox" value="1" name="lembrar">  Manter Logado</input> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="/views/view_solicita_alterar_senha.php">Esqueceu sua senha?</a>        
               </div>           
 
               <input type="submit" value="Login" class="btn btn-primary" ></input> 

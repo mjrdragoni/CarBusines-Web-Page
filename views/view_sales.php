@@ -2,7 +2,7 @@
   $link = "Venda";
   require_once("/home/u130462423/public_html/models/model_sales.php");
   require_once("/home/u130462423/public_html/controllers/conection.php");
-  
+ 
   @session_start();
   if (isset($_SESSION['usuario']) || isset($_COOKIE['usuarioLogado'])) {
       if(isset($_COOKIE['usuarioLogado']))
@@ -31,40 +31,43 @@
   <link rel="stylesheet" media="screen" href="../css/bootstrap.min.css">
 
   <!-- adicionar  Bootstrap personalizado-->
-  <link rel="stylesheet" media="screen" href="../css/estilo.css">
-   <script type="text/javascript" src="../js/load_car_models.js"></script>
+  <link rel="stylesheet" media="screen" href="../css/estilo.css">  
+
+    <!-- adicionar  Curtir e  compartilhar do facebook-->
+  <script src="http://connect.facebook.net/pt_BR/all.js#xfbml=1"></script>
+  <script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script>
 </head>
 
 <body>
 
   <center>
-   <h3> <b><p style="color:#FF8C00;">DEFINA AS CARACTERÍSTICAS DO VEÍCULO QUE DESEJA ALUGAR</h1>
+   <h3> <b><p style="color:#FF8C00;">DEFINA AS CARACTERÍSTICAS DO VEÍCULO QUE DESEJA COMPRAR</h1>
   </center>
   <br>
-  <center><form id="formrents" name="formrents" method="post" action="../models/model_rents.php">
+  <center><form id="formrsales" name="formrsales" method="post" action="../models/model_sales_busca.php">
     <p>
       <label>
-        <input type="checkbox" name="airconditioning" value="caixa de seleção" id="airconditioning" />
+        <input type="checkbox" name="airconditioning" value="Y" id="airconditioning" />
         Ar-Condicionado
       </label>
        <label>
-         <input type="checkbox" name="powersteering" value="caixa de seleção" id="powersteering" />
+         <input type="checkbox" name="powersteering" value="Y" id="powersteering" />
          Direção Hidráulica
        </label>
        <label>
-         <input type="checkbox" name="powerwindows" value="caixa de seleção" id="powerwindows" />
+         <input type="checkbox" name="powerwindows" value="Y" id="powerwindows" />
          Vidro-Elétrico
        </label>
       <label>
-         <input type="checkbox" name="automaticexchange" value="caixa de seleção" id="automaticexchange" />
+         <input type="checkbox" name="automaticexchange" value="Y" id="automaticexchange" />
          Câmbio-Automático
       </label>
       <label>
-        <input type="checkbox" name="airbag" value="caixa de seleção" id="airbag" />
+        <input type="checkbox" name="airbag" value="Y" id="airbag" />
         Airbag</label>
     </p>
     
-    <div class="col-xs-8 col-xs-offset-2">  
+    <div class="col-xs-8 col-xs-offset-3">  
       
       <div class="col-xs-4">
         <label for="brands">Marca</label>
@@ -75,27 +78,23 @@
          </select>
       </div>
 
-      <div class="col-xs-4" id="load_models">
+       <div class="col-xs-4" id="load_models">
         <label for="models">Modelo</label>
-        <select name="models" id="models" onchange="buscar_veiculos()">          
+        <select name="models" id="models">          
           <option value="" >Selecione...</option>        
                 
         </select>
       </div>
-
-      <div class="col-xs-4" id="load_veiculos" >
-        <label for="veiculos">Nome do Veículo</label>
-        <select name="veiculos" id="veiculos">     
-         
-         <option value="">Selecione...</option>      
-
-        </select> 
-       </div> 
-
-     </div>  
-    
+    </div>
+    </p> 
+    <br><br> <center><input  class="btn btn-lg btn-primary" type="submit" name="buscar" id="buscar" value="Encontrar Veículos"/> </center>
   </form>
-  </center>
+  </center>  <br><br>    
+
+
+  <?php
+      include('view_footer.html');
+  ?>
 
   <script type="text/javascript">
 
@@ -110,22 +109,7 @@
         }
       }
 
-  </script>
-  
-  <script type="text/javascript">
-
-    function buscar_veiculos(){
-        var id = $('#models').val();  //codigo do estado escolhido
-        //se encontrou o estado
-        if(id){
-          var url = '../controllers/reload_models.php?id='+id;  //caminho do arquivo php que irá buscar as cidades no BD
-          $.get(url, function(dataReturn) {
-            $('#load_veiculos').html(dataReturn);  //coloco na div o retorno da requisicao
-          });
-        }
-      }
-
-  </script>
+  </script> 
  
   <script src="../js/jquery-1.12.3.min.js"></script>
   <script src="../js/bootstrap.min.js"></script>
