@@ -2,7 +2,8 @@
 #chama o arquivo de configuração com o banco
 require_once("/home/u130462423/public_html/controllers/conection.php");
 
-$sql = "SELECT id, name FROM brands";
+$sql = "SELECT id, name FROM brands
+		ORDER BY name";
 $query_brands = mysqli_query($conexao, $sql);
 
 while($result = mysqli_fetch_array($query_brands)) { 

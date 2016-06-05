@@ -26,12 +26,16 @@ if (isset($_POST['airbag'])){
 	$airbag = "Y";
 } else { $airbag = "N";
   }
+ extract($_POST);
+ $order = $_POST['order'];
+
 
 $sql = "SELECT cars.id, car_models.name, brands.name AS brand_name, cars.color, cars.rental_price
 			FROM brands INNER JOIN
                  car_models ON brands.id = car_models.id_brand INNER JOIN
                  cars ON brands.id = cars.id_brand AND car_models.id = cars.id_model 
-                 WHERE air_conditioning = '$airconditioning' AND  power_steering  = '$powersteering' AND power_windows = '$powerwindows' AND automatic_exchange =  '$automaticexchange' AND airbags = '$airbag' AND availability = 'ALUGUEL' AND cars.status = 'Y' ";
+                 WHERE air_conditioning = '$airconditioning' AND  power_steering  = '$powersteering' AND power_windows = '$powerwindows' AND automatic_exchange =  '$automaticexchange' AND airbags = '$airbag' AND availability = 'ALUGUEL' AND cars.status = 'Y'
+                 ORDER BY $order" ;
 $query = mysqli_query($conexao, $sql); 
 
    
@@ -54,7 +58,7 @@ while($result = mysqli_fetch_array($query)){
           <td><center>'.$result['brand_name'].'</center></td>
           <td><center>'.$result['name'].'</center></td>
           <td><center>'.$result['color'].'</center></td>
-          <td><b><center> R$ '.$result['rental_price'].'</center></b></td>';
+          <td><b><center> R$ '.number_format($result['rental_price'],2,",",".").'</center></b></td>';
 
           @session_start();
             if (isset($_SESSION['usuario']) || isset($_COOKIE['usuarioLogado'])) {

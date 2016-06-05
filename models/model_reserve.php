@@ -1,15 +1,25 @@
 <?php
   @session_start();
   require_once("/home/u130462423/public_html/controllers/conection.php");
+  require_once("/home/u130462423/public_html/phpmailer/class.phpmailer.php");
+  require_once("/home/u130462423/public_html/controllers/functions.php");
   $dataretirada = mysqli_real_escape_string($conexao, trim($_POST['dataretirada']));
   $dataentrega = mysqli_real_escape_string($conexao, trim($_POST['dataentrega']));  
   $id_client = $_SESSION['idclient'];
   $horaretirada = mysqli_real_escape_string($conexao, trim($_POST['horaretirada']));
   $id_car = $_SESSION['idcar'];
   $pattern = "^[0-9]{2}+/[0-9]{2}+/[0-9]{4}^";
-  $patternh = "^[0-9]{2}+:[0-3]{2}^";   
-  $dataretconv =  substr($dataretirada,6,4)."-".substr($dataretirada,3,2)."-".substr($dataretirada,0,2);
-  $dataentconv =  substr($dataentrega,6,4)."-".substr($dataentrega,3,2)."-".substr($dataentrega,0,2);
+  $patternh = "^[0-9]{2}+:[0-3]{2}^"; 
+  // Usa a função criada e pega o timestamp das duas datas:  
+  $dataretconv =  geraTimestamp($dataretirada);
+  $dataentconv =  geraTimestamp($dataentrega);
+  $dataret =  substr($dataretirada,6,4)."-".substr($dataretirada,3,2)."-".substr($dataretirada,0,2);
+  $dataent =  substr($dataentrega,6,4)."-".substr($dataentrega,3,2)."-".substr($dataentrega,0,2);
+
+  $diferenca = $dataentconv - $dataretconv; // 19522800 segundos
+  // Calcula a diferença de dias
+  $dias = (int)floor( $diferenca / (60 * 60 * 24)); // 225 dias
+ 
 
 
   if (empty($dataretirada) || empty($dataentrega) || empty($horaretirada) || !preg_match($pattern, $dataretirada) ||
@@ -18,8 +28,8 @@
     exit();
     
   }
- 
-  if ( date("Y-m-d") > $dataretconv ||  $dataentconv < $dataretconv || $dataretirada == $dataentrega ){
+
+  if ( ($dataret <= date('Y-m-d')) || $diferenca < 0 || ($dataretirada == $dataentrega) ){
     require_once("/home/u130462423/public_html/views/view_try_again_reserva.php");
     exit(); 
   }
@@ -83,11 +93,8 @@ else {
     $color = $result['color']; 
     $rental_price = $result['rental_price']; 
   } 
-
-   $valtot = ($dataentrega - $dataretirada) * $rental_price; 
-
          
-require_once("/home/u130462423/public_html/views/view_reserva_confirmada.php");
+  $valtot = $dias * $rental_price; 
 
   // enviando e-mail de confirmação da reserva para o cliente
   // defininos o que vai no assunto do e-mail
@@ -147,22 +154,50 @@ require_once("/home/u130462423/public_html/views/view_reserva_confirmada.php");
 </html>';
  
 
-//agora inserimos as codificações corretas e  tudo mais.
-  $headers =  "Content-Type:text/html; charset=UTF-8\n";
-  $headers .= "From:  carrent.hol.es<not-repply@carrent.hol.es>\n"; //Vai ser //mostrado que  o email partiu deste email e seguido do nome
-  $headers .= "X-Sender:  <not-repply@carrent.hol.es>\n"; //email do servidor //que enviou
-  $headers .= "X-Mailer: PHP  v".phpversion()."\n";
-  $headers .= "X-IP:  ".$_SERVER['REMOTE_ADDR']."\n";
-  $headers .= "Return-Path:  <not-repply@carrent.hol.es>\n"; //caso a msg //seja respondida vai para  este email.
-  $headers .= "MIME-Version: 1.0\n";
-  $headers .= "Cc: not-repply@carrent.hol.es"; 
 
- 
+// Inicia a classe PHPMailer
+$mail = new PHPMailer();
+// Define os dados do servidor e tipo de conexão
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+$mail->IsSMTP(); // Define que a mensagem será SMTP
+$mail->Host = "mx1.hostinger.com.br"; // Endereço do servidor SMTP
+$mail->SMTPAuth = true; // Usa autenticação SMTP? (opcional)
+$mail->Port = 2525;
+$mail->Username = "not-repply@carrent.hol.es"; // Usuário do servidor SMTP
+$mail->Password = "1983dragoni"; // Senha do servidor SMTP
+// Define o remetente
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+$mail->From = "not-repply@carrent.hol.es"; // Seu e-mail
+$mail->FromName = "CarRent"; // Seu nome
+// Define os destinatário(s)
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+$mail->AddAddress($client_email, $client_name);
+$mail->AddAddress('not-repply@carrent.hol.es');
+//$mail->AddCC('ciclano@site.net', 'Ciclano'); // Copia
+//$mail->AddBCC('fulano@dominio.com.br', 'Fulano da Silva'); // Cópia Oculta
+// Define os dados técnicos da Mensagem
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+$mail->IsHTML(true); // Define que o e-mail será enviado como HTML
+$mail->CharSet = 'utf-8'; // Charset da mensagem (opcional)
+// Define a mensagem (Texto e Assunto)
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+$mail->Subject  = $assunto; // Assunto da mensagem
+$mail->Body = $mensagem;
+$mail->AltBody = "";
+// Define os anexos (opcional)
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+//$mail->AddAttachment("c:/temp/documento.pdf", "novo_nome.pdf");  // Insere um anexo
+// Envia o e-mail
+$enviado = $mail->Send();
+// Limpa os destinatários e os anexos
+$mail->ClearAllRecipients();
+$mail->ClearAttachments();
+// Exibe uma mensagem de resultado
 
-mail($client_email, $assunto, $mensagem, $headers);  //função que faz o envio do email.
-
-
+require_once("/home/u130462423/public_html/views/view_reserva_confirmada.php");
 
 @mysqli_close($conexao);
 }
+
+
 ?>
