@@ -6,16 +6,18 @@
 
 	$login =  mysqli_real_escape_string($conexao, trim($_POST['login']));
 	$senha =  mysqli_real_escape_string($conexao, trim($_POST['pass']));
-	$sql = "SELECT users.id, clients.id AS id_client
+	$sql = "SELECT users.id AS id_user, clients.id AS id_client
 			FROM users 
 			INNER JOIN clients ON clients.id = users.id_client
-			WHERE users.login = '$login'  OR clients.email = '$login'
-			AND users.pass = md5('$senha') ";
+			WHERE (users.login = '$login' AND users.pass = md5('$senha')) OR 
+			(clients.email = '$login' AND users.pass = md5('$senha')) ";
 	$r = @mysqli_query($conexao, $sql);
 	while ($result = mysqli_fetch_array($r)) {			 	
 			 	$id_client = $result['id_client'];
+			 	$id_user = $result['id_user'];
 			}
 			setcookie("idclient",$id_client); 
+			setcookie("iduser",$id_user); 
 
 	$num = mysqli_num_rows($r);
 	
@@ -39,12 +41,14 @@
 			//o usuario vai ficar logado por um mes
 			setcookie("usuarioLogado",$user_name,time()+60*60*24*30);
 			setcookie("idusuarioLogado",$id_client,time()+60*60*24*30);
+			setcookie("iduser",$id_user, time()+60*60*24*30); 
 			
 					
 			}	
 
 		@session_start();
-		$_SESSION['usuario'] = $user_name;	
+		$_SESSION['usuario'] = $user_name;
+		$_SESSION['iduser']	 = $id_user;
 						
 			header("Location:../index.php");
 	} 

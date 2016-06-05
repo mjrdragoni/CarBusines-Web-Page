@@ -7,9 +7,9 @@
   $horaretirada = mysqli_real_escape_string($conexao, trim($_POST['horaretirada']));
   $id_car = $_SESSION['idcar'];
   $pattern = "^[0-9]{2}+/[0-9]{2}+/[0-9]{4}^";
-  $patternh = "^[0-9]{2}+:[0-3]{2}^";  
-  $dataatual = date('d/m/Y');
-  
+  $patternh = "^[0-9]{2}+:[0-3]{2}^";   
+  $dataretconv =  substr($dataretirada,6,4)."-".substr($dataretirada,3,2)."-".substr($dataretirada,0,2);
+  $dataentconv =  substr($dataentrega,6,4)."-".substr($dataentrega,3,2)."-".substr($dataentrega,0,2);
 
 
   if (empty($dataretirada) || empty($dataentrega) || empty($horaretirada) || !preg_match($pattern, $dataretirada) ||
@@ -19,21 +19,33 @@
     
   }
  
-  if ( $dataretirada <  $dataatual  ||  $dataentrega < $dataretirada || $dataretirada == $dataentrega ){
+  if ( date("Y-m-d") > $dataretconv ||  $dataentconv < $dataretconv || $dataretirada == $dataentrega ){
     require_once("/home/u130462423/public_html/views/view_try_again_reserva.php");
-    exit();
+    exit(); 
   }
-    
+  
+  $sql = "SELECT status FROM cars 
+          WHERE id = '$id_car'";
+  $r = @mysqli_query($conexao, $sql);
+  while ($result = mysqli_fetch_array($r)) {
+    $status = $result['status'];
+  }
+  
+  if ($status == "N"){
+    require_once("/home/u130462423/public_html/views/view_try_again3.php");
+    exit();
+    }
+else { 
     
   $sql = "INSERT  INTO `reservation` (`id_client` , `start_date`,  `end_date`  ,`start_hour`, `end_hour`,`id_car`) 
           VALUES  ('$id_client', '$dataretirada', '$dataentrega', '$horaretirada', '$horaretirada', '$id_car')";
   $r = @mysqli_query($conexao, $sql);
 
-/*
+
   $sql = "UPDATE cars
         SET status = 'N'
         WHERE id = '$id_car'";
-  $r = @mysqli_query($conexao, $sql);  */
+  $r = @mysqli_query($conexao, $sql);  
            
 
  $sql = "SELECT id FROM reservation 
@@ -129,10 +141,6 @@ require_once("/home/u130462423/public_html/views/view_reserva_confirmada.php");
     </div>
   </div>
 
-
-
-
-
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.3/jquery.min.js"></script>
  
 </body>
@@ -154,8 +162,7 @@ require_once("/home/u130462423/public_html/views/view_reserva_confirmada.php");
 mail($client_email, $assunto, $mensagem, $headers);  //função que faz o envio do email.
 
 
+
 @mysqli_close($conexao);
-
+}
 ?>
- 
-
