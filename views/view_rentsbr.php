@@ -33,7 +33,7 @@
   <!-- adicionar  Bootstrap personalizado-->
   <link rel="stylesheet" media="screen" href="../css/estilo.css">
    <style>
-  .modal-header, h4, .close {
+  .modal-header, h5, .close {
       background-color: #1d81b3;
       color:#FF8C00 !important;
       text-align: center;
@@ -50,7 +50,7 @@
 
 </head>
 
-<body <?php $onload; ?> >
+<body>
 <div class="container-fluid">
   <center>
    <h3> <b><p style="color:#FF8C00;">DEFINA AS CARACTERÍSTICAS DO VEÍCULO QUE DESEJA ALUGAR</h1>
@@ -59,25 +59,34 @@
   <center><form id="formrents" name="formrents" method="POST" action="../models/model_rents.php">
     <p>
       <label>
-        <input type="checkbox" name="airconditioning" value="caixa de seleção" id="airconditioning" />
+        <input type="checkbox" name="airconditioning" value="Y" id="airconditioning" />
         Ar-Condicionado
       </label>
        <label>
-         <input type="checkbox" name="powersteering" value="caixa de seleção" id="powersteering" />
+         <input type="checkbox" name="powersteering" value="Y" id="powersteering" />
          Direção Hidráulica
        </label>
        <label>
-         <input type="checkbox" name="powerwindows" value="caixa de seleção" id="powerwindows" />
+         <input type="checkbox" name="powerwindows" value="Y" id="powerwindows" />
          Vidro-Elétrico
        </label>
       <label>
-         <input type="checkbox" name="automaticexchange" value="caixa de seleção" id="automaticexchange" />
+         <input type="checkbox" name="automaticexchange" value="Y" id="automaticexchange" />
          Câmbio-Automático
       </label>
       <label>
-        <input type="checkbox" name="airbag" value="caixa de seleção" id="airbag" />
+        <input type="checkbox" name="airbag" value="Y" id="airbag" />
         Airbag</label>
     </p>
+     <br><br> <center> <label for="order">Ordenar por: </label> <select name="order" id="order">
+              <option value="brand_name ASC">Selecione...</option>
+              <option value="rental_price DESC">Maior Preço</option>
+              <option value="rental_price ASC">Menor Preço</option>
+              <option value="color ASC">Cor</option>                   
+              <option value="brand_name ASC">Marca</option>    
+              <option value="name ASC">Modelo</option>    
+
+     </select></center> 
  
   <br />
     </p>
@@ -101,7 +110,7 @@
       <div class="modal-content">
         <div class="modal-header" style="padding:35px 50px;">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4><span class="glyphicon glyphicon-lock"></span> Efetue seu Cadastro</h4>
+          <h4><span class="glyphicon glyphicon-lock"></span> Efetue seu Cadastro e/ou Faça Logon</h4>
         </div>
         <div class="modal-body">
        <form id="formcadastro" name="formcadastro" method="post" action="../models/model_cadastra_cliente.php">
@@ -185,7 +194,7 @@
       
     </div>
   </div> 
-</div>>
+</div>
 </div>
    
    <?php

@@ -64,15 +64,15 @@
 						<font color="#FF8C00">Cód. do Veículo:</font> <?=$id_car?>
 						<font color="#FF8C00">Marca: </font> <?=$brand?>
 						<font color="#FF8C00">Modelo: </font> <?=$model?>
-						<font color="#FF8C00">Cor: </font><?=$color?>
-						<font color="#FF8C00">Preço da Diária: </font> R$ <?=$rental_price?>,00
-						<font color="#FF8C00">Valor Total: </font> R$ <?=$valtot?>,00
+						<font color="#FF8C00">Cor: </font><?=$color?><br><br>
+						<center><font color="#FF8C00">Preço da Diária: </font> R$ <?=$rental_price?>,00
+						<font color="#FF8C00">Valor Total: </font> R$ <?=$valtot?>,00</center>
 					</h4>
 				</div>
 
 				<br>
 
-				<center><h3>Em instantes você receberá um e-mail com a confirmação de sua reserva.</h3></center>			
+				<center><h3>Em instantes você receberá um e-mail com a confirmação de sua reserva.<br> Caso o pagamento da mesma não seja efetuado em 24h ela será automáticamente cancelada!</h3></center>			
 			</div>
 		</div>
 	</div>

@@ -55,7 +55,7 @@
             <ul class="nav navbar-nav ">
             
              <li><?php if ($link == 'Sobre') echo '<li class="active">';?><a href="/views/view_sobre.php">Sobre</a></li>
-             <li><?php if ($link == 'Contato') echo '<li class="active">';?><a href="#about">Contato</a></li>
+             <li><?php if ($link == 'Contato') echo '<li class="active">';?><a href="/views/view_contato.php">Contato</a></li>
              <li><?php if ($link == 'Aluguel') echo '<li class="active">';?><a href="/views/view_rentsb.php">Aluguel</a>  </li>
              <li><?php if ($link == 'Venda') echo '<li class="active">';?><a href="/views/view_sales.php">Compra e Venda</a></li>	
                   

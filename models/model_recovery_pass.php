@@ -1,7 +1,7 @@
 <?php
 
   require_once("/home/u130462423/public_html/controllers/conection.php");
-
+  require_once("/home/u130462423/public_html/phpmailer/class.phpmailer.php");
     $user = mysqli_real_escape_string($conexao, trim($_POST['email']));
     $q = mysqli_query($conexao, "SELECT * FROM clients WHERE email = '$user'");
  
@@ -45,6 +45,7 @@
 
                   <h4>
                     <font color="#1d81b3">Olá '.$user. ', clique no link abaixo para poder efetuar a alteração de sua senha: </font><br><br>
+                     <font color="#FF8C00">Este é um link único, caso você clique nele e não consiga efetivar a alteração de sua senha, você deverá fazer uma nova solicitação de troca de senha.</font>  
                     <font color="#FF8C00">' .$link.'</font>  
                   </h4>          
 
@@ -58,19 +59,47 @@
         </body>
         </html>';
          
-      $assunto = "alteração de Senha";
-    //agora inserimos as codificações corretas e  tudo mais.
-      $headers =  "Content-Type:text/html; charset=UTF-8\n";
-      $headers .= "From:  carrent.hol.es<not-repply@carrent.hol.es>\n"; //Vai ser //mostrado que  o email partiu deste email e seguido do nome
-      $headers .= "X-Sender:  <not-repply@carrent.hol.es>\n"; //email do servidor //que enviou
-      $headers .= "X-Mailer: PHP  v".phpversion()."\n";
-      $headers .= "X-IP:  ".$_SERVER['REMOTE_ADDR']."\n";
-      $headers .= "Return-Path:  <not-repply@carrent.hol.es>\n"; //caso a msg //seja respondida vai para  este email.
-      $headers .= "MIME-Version: 1.0\n";
-      $headers .= "Cc: not-repply@carrent.hol.es";
+      $assunto = "Alteração de Senha";
 
-      mail($user, $assunto, $mensagem, $headers);  //função que faz o envio do email.
-      
+// Inicia a classe PHPMailer
+$mail = new PHPMailer();
+// Define os dados do servidor e tipo de conexão
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+$mail->IsSMTP(); // Define que a mensagem será SMTP
+$mail->Host = "mx1.hostinger.com.br"; // Endereço do servidor SMTP
+$mail->SMTPAuth = true; // Usa autenticação SMTP? (opcional)
+$mail->Port = 2525;
+$mail->Username = "not-repply@carrent.hol.es"; // Usuário do servidor SMTP
+$mail->Password = "1983dragoni"; // Senha do servidor SMTP
+// Define o remetente
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+$mail->From = "not-repply@carrent.hol.es"; // Seu e-mail
+$mail->FromName = "CarRent"; // Seu nome
+// Define os destinatário(s)
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+$mail->AddAddress($user, $user);
+$mail->AddAddress('not-repply@carrent.hol.es');
+//$mail->AddCC('ciclano@site.net', 'Ciclano'); // Copia
+//$mail->AddBCC('fulano@dominio.com.br', 'Fulano da Silva'); // Cópia Oculta
+// Define os dados técnicos da Mensagem
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+$mail->IsHTML(true); // Define que o e-mail será enviado como HTML
+$mail->CharSet = 'utf-8'; // Charset da mensagem (opcional)
+// Define a mensagem (Texto e Assunto)
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+$mail->Subject  = $assunto; // Assunto da mensagem
+$mail->Body = $mensagem;
+$mail->AltBody = "";
+// Define os anexos (opcional)
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+//$mail->AddAttachment("c:/temp/documento.pdf", "novo_nome.pdf");  // Insere um anexo
+// Envia o e-mail
+$enviado = $mail->Send();
+// Limpa os destinatários e os anexos
+$mail->ClearAllRecipients();
+$mail->ClearAttachments();
+
+
       header("Location:/views/view_success_pass_order.php");
 
     }

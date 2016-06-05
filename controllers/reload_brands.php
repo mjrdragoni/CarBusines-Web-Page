@@ -13,10 +13,11 @@
         }
     
 ?>
-
+<div class="col-xs-12">
 <label for="models">Modelo</label>
-<select name="models" id="models" onchange="buscar_veiculos()">
+<select name="models" id="models" onchange="buscar_veiculos()" required="required">
   
-  <option value="" >Selecione...</option>   
-    <?=$html_model?>        
+  <option placeholder="Selecione..." > </option>   
+    <?=$html_model?>         
 </select>
+</div>
