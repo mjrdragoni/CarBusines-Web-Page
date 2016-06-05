@@ -2,7 +2,7 @@
   $link = "Venda";
   require_once("/home/u130462423/public_html/models/model_sales.php");
   require_once("/home/u130462423/public_html/controllers/conection.php");
-  
+  require_once("/home/u130462423/public_html/models/model_sales_busca.php"); 
  
   @session_start();
   if (isset($_SESSION['usuario']) || isset($_COOKIE['usuarioLogado'])) {
@@ -35,18 +35,22 @@
 
   <!-- adicionar  Bootstrap personalizado-->
   <link rel="stylesheet" media="screen" href="../css/estilo.css">
- 
+   <style>
+  .modal-header, h4, .close {
+      background-color: #1d81b3;
+      color:#FF8C00 !important;
+      text-align: center;
+      font-size: 30px;
+  }
+  .modal-footer {
+      background-color: #f9f9f9;
+  }
+  </style>
 
   <!-- adicionar  Curtir e  compartilhar do facebook-->
   <script src="http://connect.facebook.net/pt_BR/all.js#xfbml=1"></script>
   <script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script>
-  <style>
-    .carousel-inner > .item > img {
-    position-relative;
-    min-width: 100%;
-    height: 300px; /* Altura da imagem dentro do Carousel */
-}
-  </style>
+
 </head>
 
 <body>
@@ -55,7 +59,7 @@
    <h3> <b><p style="color:#FF8C00;">DEFINA AS CARACTERÍSTICAS DO VEÍCULO QUE DESEJA COMPRAR</h1>
   </center>
   <br>
-  <center><form id="formsales" name="formrsales" method="POST" action="">
+  <center><form id="formsales" name="formrsales" method="POST" action="../models/model_sales_busca.php">
     <p>
       <label>
         <input type="checkbox" name="airconditioning" value="Y" id="airconditioning" />
@@ -77,9 +81,9 @@
         <input type="checkbox" name="airbag" value="Y" id="airbag" />
         Airbag</label>
     </p>
-    <div class="col-xs-12">  
+    <div class="col-xs-8 col-xs-offset-3">  
       
-      <div class="col-xs-6" align="right">
+      <div class="col-xs-4">
         <label for="brands">Marca</label>
           <select name="brands" id="brands" onchange="buscar_marcas()"  >
           <option>Selecione...</option>
@@ -88,7 +92,7 @@
          </select>
       </div>
 
-      <div class="col-xs-6" id="load_models" align="left">
+      <div class="col-xs-4" id="load_models">
         <label for="models">Modelo</label>
         <select name="models" id="models" onchange="buscar_veiculos()">          
           <option value="" >Selecione...</option>        
@@ -97,44 +101,27 @@
       </div>
     </div>
     </p> 
-   <br><br> <center> <label for="order">Ordenar por: </label> <select name="order" id="order">
-              <option value="price ASC">Selecione...</option>
-              <option value="price DESC">Maior Preço</option>
-              <option value="price ASC">Menor Preço</option>
-              <option value="color ASC">Cor</option>
-              <option value="year ASC">Ano</option>            
-
-     </select></center> 
-    <br><center><input  class="btn btn-lg btn-primary" type="submit"  name="buscar" id="buscar" onclick="document.formrsales.action='../models/model_sales_busca.php'; document.form1.submit();"  value="Encontrar Veículos"/>  <input  class="btn btn-lg btn-warning" name="buscardecliente" type="submit" id="buscardecliente"   onclick="document.formrsales.action='../models/model_sales_customer_busca.php'; document.formrsales.submit();"  value="Veículos Anunciados por Clientes"/></center>
+    <br><br> <center><input  class="btn btn-lg btn-primary" type="submit" name="buscar" id="buscar" value="Encontrar Veículos"/> </center>
   </form>
-  </center>  
+  </center>  <br><br> 
 
-     <br>
-
-   
+  <div class="row">
+    <div class="col-xs-6 col-xs-offset-3">               
     
+     <?=$showhtm?>     
+        
+    </div>
+  </div>
 
-         <div class="row">
-          <div class="col-xs-8 col-xs-offset-2">               
-    
-            <?=$showhtm?>       
-          </div>
-        </div> 
-
-     <?=$htmlmodal?>
-
-
-    <div class="modal fade col-xs-12" id="carry_resgistration" role="dialog">
+ <!-- Modal -->
+  <div class="modal fade col-xs-12" id="carry_resgistration" role="dialog">
     <div class="modal-dialog">
     
       <!-- Modal content-->
       <div class="modal-content">
-        <div class="modal-header" style=" background-color: #1d81b3;
-                                          color:#FF8C00 !important;
-                                          text-align: center;
-                                          font-size: 30px; padding:35px 50px;">
+        <div class="modal-header" style="padding:35px 50px;">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4><span class="glyphicon glyphicon-lock"></span> Efetue seu Cadastro e/ou Faça Logon</h4>
+          <h4><span class="glyphicon glyphicon-lock"></span> Efetue seu Cadastro</h4>
         </div>
         <div class="modal-body">
        <form id="formcadastro" name="formcadastro" method="post" action="../models/model_cadastra_cliente.php">
@@ -207,24 +194,22 @@
           <p>&nbsp;</p></center>
          <center><a href="/views/view_solicita_alterar_senha.php"><font color="#FF8C00">Clique aqui</font></a> caso tenha esquecido sua senha.</center>
         </div>
-        <div class="modal-footer" background-color: #f9f9f9;>
+        <div class="modal-footer">
           <center><button type="submit" class="btn btn-warning btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
           
             <input  class="btn  btn-primary" type="submit" name="cadastrar" id="cadastrar" value="Efetuar meu Cadastro" onsubmit="validateForm();" />
               
         </form>             
         </div>
-      </div>
-    </div>  
- 
+      </div>      
+    </div>
+  </div> 
+</div>>
 </div>
-</div><br>
    
    <?php
       include('view_footer.html');
   ?>
-
-  
     <script type="text/javascript">
 
     function buscar_marcas(){
@@ -240,8 +225,7 @@
 
   </script> 
  
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.3/jquery.min.js"></script>
-  <script src="../js/bootstrap.min.js"></script>
+
   <script type="text/javascript" src="../js/jquery.maskedinput.min.js"></script>
   <script type="text/javascript" src="../js/jquery.validate.min.js"></script>
  

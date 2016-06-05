@@ -44,34 +44,25 @@
   <center><form id="formrents" name="formrents" method="POST" action="../models/model_rents.php">
     <p>
       <label>
-        <input type="checkbox" name="airconditioning" value="Y" id="airconditioning" />
+        <input type="checkbox" name="airconditioning" value="caixa de seleção" id="airconditioning" />
         Ar-Condicionado
       </label>
        <label>
-         <input type="checkbox" name="powersteering" value="Y" id="powersteering" />
+         <input type="checkbox" name="powersteering" value="caixa de seleção" id="powersteering" />
          Direção Hidráulica
        </label>
        <label>
-         <input type="checkbox" name="powerwindows" value="Y" id="powerwindows" />
+         <input type="checkbox" name="powerwindows" value="caixa de seleção" id="powerwindows" />
          Vidro-Elétrico
        </label>
       <label>
-         <input type="checkbox" name="automaticexchange" value="Y" id="automaticexchange" />
+         <input type="checkbox" name="automaticexchange" value="caixa de seleção" id="automaticexchange" />
          Câmbio-Automático
       </label>
       <label>
-        <input type="checkbox" name="airbag" value="Y" id="airbag" />
+        <input type="checkbox" name="airbag" value="caixa de seleção" id="airbag" />
         Airbag</label>
     </p>
-     <br><br> <center> <label for="order">Ordenar por: </label> <select name="order" id="order">
-              <option value="brand_name ASC">Selecione...</option>
-              <option value="rental_price DESC">Maior Preço</option>
-              <option value="rental_price ASC">Menor Preço</option>
-              <option value="color ASC">Cor</option>                   
-              <option value="brand_name ASC">Marca</option>    
-              <option value="name ASC">Modelo</option>    
-
-     </select></center> 
  
   <br />
     </p>

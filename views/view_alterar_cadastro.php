@@ -71,7 +71,7 @@
             <label for="celular"> Celular</label>
             <input name="celular" id="celular" size="45" value="<?=$cel?>"/> 
             <label for="email">E-mail</label>
-            <input name="email" type="email" id="email" size="50" value="<?=$email?>"  required/>
+            <input name="email" type="email" id="email" size="50" value="<?=$email?>" readonly required/>
                     
           </p>
           <p>
@@ -116,33 +116,7 @@
             </select>
             <label for="cep">CEP</label>
             <input type="text" name="cep" id="cep" value="<?=$cep?>" required="Digite seu CEP"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <a href="/views/view_alterar_senha_direto.php">Alterar minha Senha</a> &nbsp;&nbsp;
-              <a href="/models/model_carros_cliente.php"><font color="#696969"> Veículos que Anunciei</font></a>&nbsp;&nbsp; 
-              <a href="#delete_client" data-toggle="modal"><font color="#FF8C00"> Excluir meu Cadastro</font></a>
-             
-             </P>
-
-  <div class="modal fade col-xs-12" id="delete_client" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header" style=" background-color: #1d81b3;
-                                          color:#FF8C00 !important;
-                                          text-align: center;
-                                          font-size: 20px; padding:35px 50px;">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <span class="glyphicon glyphicon-alert"></span> Vocês está prestes a apagar permanentemente seu Cadastro, juntamente com todos os carros anunciados por você e também seu histórico de reservas.<br> Isso é irreversível. <br>Tem certeza que deseja continuar?
-        </div>
-        <div class="modal-body">
-             <center><button type="submit" class="btn btn-warning btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
-          
-             <a href="../models/model_excluir_cliente.php"><input  class="btn btn-danger btn-primary"  name="excluir" id="excluir" value="Confirmar Exclusão" /></a>
-        </div>        
-      </div> 
-    </div>
-  </div>
-
+             <a href="/views/view_alterar_senha_direto.php">Alterar minha Senha</a> </P>
           <p>&nbsp;</p>
           <p>
             <center><a href="../index.php"><input  class="btn btn-lg btn-warning" type="button" name="cancelar" id="cancelar" value="Cancelar"></a>

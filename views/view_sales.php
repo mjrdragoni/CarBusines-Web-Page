@@ -31,8 +31,7 @@
   <link rel="stylesheet" media="screen" href="../css/bootstrap.min.css">
 
   <!-- adicionar  Bootstrap personalizado-->
-  <link rel="stylesheet" media="screen" href="../css/estilo.css"> 
-   
+  <link rel="stylesheet" media="screen" href="../css/estilo.css">  
 
     <!-- adicionar  Curtir e  compartilhar do facebook-->
   <script src="http://connect.facebook.net/pt_BR/all.js#xfbml=1"></script>
@@ -45,7 +44,7 @@
    <h3> <b><p style="color:#FF8C00;">DEFINA AS CARACTERÍSTICAS DO VEÍCULO QUE DESEJA COMPRAR</h1>
   </center>
   <br>
-  <center><form id="formrsales" name="formrsales" method="post" action="">
+  <center><form id="formrsales" name="formrsales" method="post" action="../models/model_sales_busca.php">
     <p>
       <label>
         <input type="checkbox" name="airconditioning" value="Y" id="airconditioning" />
@@ -68,18 +67,18 @@
         Airbag</label>
     </p>
     
-    <div class="col-xs-12 ">  
-    
-      <div class="col-xs-6" align="right">
+    <div class="col-xs-8 col-xs-offset-3">  
+      
+      <div class="col-xs-4">
         <label for="brands">Marca</label>
-          <select name="brands" id="brands" onchange="buscar_marcas()">
+          <select name="brands" id="brands" onchange="buscar_marcas()"  >
           <option>Selecione...</option>
                 <?=$html?>      
  
          </select>
       </div>
 
-       <div class="col-xs-6" id="load_models" align="left">
+       <div class="col-xs-4" id="load_models">
         <label for="models">Modelo</label>
         <select name="models" id="models">          
           <option value="" >Selecione...</option>        
@@ -87,132 +86,10 @@
         </select>
       </div>
     </div>
-    </p>
-  <br><br> <center> <label for="order">Ordenar por: </label> <select name="order" id="order">
-              <option value="price ASC">Selecione...</option>
-              <option value="price DESC">Maior Preço</option>
-              <option value="price ASC">Menor Preço</option>
-              <option value="color ASC">Cor</option>
-              <option value="year ASC">Ano</option>            
-
-     </select></center> 
-    <br> <center><input  class="btn btn-lg btn-primary" type="submit"  name="buscar" id="buscar" onclick="document.formrsales.action='../models/model_sales_busca.php'; document.form1.submit();"  value="Encontrar Veículos"/>  <input  class="btn btn-lg btn-warning" name="buscardecliente" type="submit" id="buscardecliente"   onclick="document.formrsales.action='../models/model_sales_customer_busca.php'; document.formrsales.submit();"  value="Veículos Anunciados por Clientes"/></center>
+    </p> 
+    <br><br> <center><input  class="btn btn-lg btn-primary" type="submit" name="buscar" id="buscar" value="Encontrar Veículos"/> </center>
   </form>
-  </center>  
-
-     <br><br>
-
-   
-    <?php
-      @session_start();
-      if (isset($_SESSION['usuario']) || isset($_COOKIE['usuarioLogado'])) {
-          if(isset($_COOKIE['usuarioLogado']))
-          $_SESSION['usuario'] = $_COOKIE['usuarioLogado'];
-        echo '<h4><center><p> Caso tenha Interesse em Anunciar seu Veículo em nosso Site   <a href="/views/view_cadastro_veiculo.php"><font color="#FF8C00">Clique aqui.</font></a></p></center></h4>';
-      }
-        else{
-          echo '<h4><center><p> Caso tenha Interesse em Anunciar seu Veículo em nosso Site   <a href="#carry_resgistration" data-toggle="modal"><font color="#FF8C00">Clique aqui.</font></a></p></center></h4>';
-        }
-        ?>
-
-
-    <div class="modal fade col-xs-12" id="carry_resgistration" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header" style=" background-color: #1d81b3;
-                                          color:#FF8C00 !important;
-                                          text-align: center;
-                                          font-size: 30px; padding:35px 50px;">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4><span class="glyphicon glyphicon-lock"></span> Efetue seu Cadastro e/ou Faça Logon</h4>
-        </div>
-        <div class="modal-body">
-       <form id="formcadastro" name="formcadastro" method="post" action="../models/model_cadastra_cliente.php">
-        <center><p>
-            <label for="usuario">Nome de Usuário</label>
-            <input name="usuario" type="text" id="usuario" size="15" required />
-           <label for="senha">Senha</label>
-            <input name="senha" type="password" id="senha" size="15" required/>
-           <p><label for="confirmasenha">Confirme sua Senha</label>
-            <input name="confirmasenha" type="password" id="confirmasenha" size="15" required/>
-         </p>
-          <p>
-            <label for="nome">Nome Completo</label>
-            <input name="nome" type="text" id="nome" size="40" required/></p>
-            <p><label for="rg">RG</label>
-            <input name="rg" type="" id="rg" size="15" required />
-            
-              <label for="cpf">CPF</label>
-              <input name="cpf" type="text" id="cpf" size="15" required/></p>
-             <p> <label for="telefone">Telefone</label>
-            <input name="telefone" type="text" id="telefone" size="15" required/>    
-
-            <label for="celular"> Celular</label>
-            <input name="celular" id="celular" size="15" required/> </p>
-            <p><label for="email">E-mail</label>
-            <input name="email" type="email" id="email" size="50" required/>
-                    
-          </p>
-          <p>
-            <label for="endereco">Endereço </label>
-            <input name="endereco" type="text" id="endereco" size="50" required/>
-          </p>
-          <p>
-            <label for="cidade">cidade</label>
-            <input name="cidade" type="text" id="cidade" size="20" required/>
-            <label for="bairro">Bairro</label>
-            <input name="bairro" type="text" id="bairro" size="20" required/>
-          <P><label for="estado">Estado</label>
-            <select name="estado" size="1" id="estado" required>
-              <option>AC</option>
-              <option>AL</option>
-              <option>AP</option>
-              <option>AM</option>
-              <option>BA</option>
-              <option>CE</option>
-              <option>DF</option>
-              <option>ES</option>
-              <option>GO</option>
-              <option>MA</option>
-              <option>MT</option>
-              <option>MS</option>
-              <option>MG</option>
-              <option>PA</option>
-              <option>PB</option>
-              <option>PR</option>
-              <option>PE</option>
-              <option>PI</option>
-              <option>RJ</option>
-              <option>RN</option>
-              <option>RS</option>
-              <option>RO</option>
-              <option>RR</option>
-              <option>SC</option>
-              <option>SP</option>
-              <option>SE</option>
-              <option>TO</option>
-            </select>
-            <label for="cep">CEP</label>
-            <input type="text" name="cep" id="cep" required="Digite seu CEP"/></P>
-          <p>&nbsp;</p></center>
-         <center><a href="/views/view_solicita_alterar_senha.php"><font color="#FF8C00">Clique aqui</font></a> caso tenha esquecido sua senha.</center>
-        </div>
-        <div class="modal-footer" background-color: #f9f9f9;>
-          <center><button type="submit" class="btn btn-warning btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
-          
-            <input  class="btn  btn-primary" type="submit" name="cadastrar" id="cadastrar" value="Efetuar meu Cadastro" onsubmit="validateForm();" />
-              
-        </form>             
-        </div>
-      </div>
-      
-    </div>
-  </div> 
-</div>
-</div>
-
+  </center>  <br><br>    
 
 
   <?php
@@ -232,9 +109,8 @@
         }
       }
 
-  </script>
-  
-
+  </script> 
+ 
   <script src="../js/jquery-1.12.3.min.js"></script>
   <script src="../js/bootstrap.min.js"></script>
  

@@ -30,7 +30,7 @@ body {
 <body>
 	<div class="container col-xs-12">
 		<div class="row">
-			<p><center><h1>Infelizmente este <font color="#FF8C00">Nome de Usuário</font> não consta em nossos registros. <br> Tente novamente Por Favor!</h1></center></p>
+			<p><center><h1>Infelizmente este <font color="#FF8C00">Nome de Usuário</font> não consta em nossos retistros. <br> Tente novamente Por Favor!</h1></center></p>
 			<br><br><br><br>
 			 <center><a href="javascript:window.history.go(-1)"><button class="btn btn-lg btn-warning" type="button">Tentar Novamente</button></center>
 		</div>
